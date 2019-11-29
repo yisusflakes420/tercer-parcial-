@@ -1,0 +1,187 @@
+/*
+practica tercer parcial
+Rosas Riquelme Uriel
+*/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <math.h>
+#include <iostream>
+using namespace std;
+void Vector(int myVector[], int size);
+void Vector2(double myVector[], int size);
+void Vector3(int myVector[], int size);
+void suma(int vector1[3],int vector2[3],int *ptr);
+void resta(int vector1[3],int vector2[3],int *ptr);
+void punto(int myVector[3],int myVector2[3],int size);
+float normal (int myVector[],int size);
+float escalar(int myVector[], int myV2[],int size);
+void punto(int myVector[3],int myVector2[3],int size);
+void dos(int vector1[3], int *ptr, double *ptr2);
+
+int main(void)
+{
+int opt;
+float n,e;
+char rep;
+int a[3] = {0,0,0};
+int *ptra = &a[0];int b[3] = {9,6,-2};int c[3] = {0,0,0};double cf[3] = {0.0,0.0,0.0};
+int *ptrC = &c[0];double *ptrCf = &cf[0];
+int opcion;
+Vector3(a,3);
+Vector3(b,3);
+printf("----Vector 1----\n");
+Vector(a,3);
+printf("----Vector 2----");
+Vector(b,3);
+
+do{
+printf("------BIENVENIDO------\n\n");
+printf("------Calculadora de Vectores------\n\n");
+printf("1. Suma \n");
+printf("2. Resta\n");
+printf("3. Norma\n");
+printf("4. Producto Punto\n");
+printf("5. Producto Escalar\n");
+printf("6. Unitario\n");
+printf("----Realizado por Uriel Rosas Riquelme----\n");
+cin>>opcion;
+switch(opt)
+{
+case 1:
+suma(a,b,ptrC);
+printf("\n suma Vector 1\n");
+Vector(c,3);
+break;
+
+case 2:
+resta(a,b,ptrC);
+printf("\n resta Vector 1\n");
+Vector(c,3);
+break;
+
+case 3:
+n = normal(a,3);
+printf("\n norma con raiz Vector 1 %f \n",n);
+break;
+
+case 4:
+printf(" \n Producto punto");
+punto(a,b,3);
+break;
+
+case 5:
+printf("\n \n Producto escalar");
+e = escalar(a,b,3);
+printf(" \n producto escalar con raiz: %f ",e);
+break;
+
+case 6:
+printf("\n \n vector unitario \n");
+dos(a,ptra,ptrCf);
+break;
+
+default:
+printf("La opcion introducida es invalida\n");
+break;
+
+}
+
+printf("Si desea ralizar otra operación oprima s\n");
+rep = getch();}
+while((rep=='S') || (rep=='s'));
+
+}
+
+void Vector(int myVector[],int size)
+{
+for (int i=0; i<size; i++)
+{
+printf("vector[%d]: %d\n",i,myVector[i]);
+}
+}
+
+void Vector3(int myVector[],int size)
+{for (int i=0; i<size; i++)
+{
+int valor;
+printf("vector[%d]: \n",i);
+scanf("%d",&valor);
+myVector[i] = valor;
+}
+}
+
+void VectorF(double myVector[],int size)
+{
+for (int i=0; i<size; i++){
+printf("vector[%d]: %d\n",i,myVector[i]);
+}
+}
+
+void suma(int vector1[3], int vector2[3],int *ptr)
+{
+for(int i = 0; i<3; i++)
+{
+*(ptr+i) = vector1[i] + vector2[i];
+}
+}
+
+void resta(int vector1[3], int vector2[3],int *ptr)
+{
+for(int i = 0; i<3; i++)
+{
+*(ptr+i) = vector1[i] - vector2[i];
+}
+}
+
+float normal (int myVector[3],int size)
+{
+float suma=0.0;
+for(int i = 0; i<=size; i++)
+{
+suma += myVector[i]*myVector[i];
+}
+printf(" norma sin raiz %f",suma);
+return sqrt(suma);
+}
+void punto (int myVector[3],int myVector2[3],int size)
+{
+float suma=0.0;
+for(int i = 0; i<=size; i++)
+{
+suma += myVector[i]*myVector2[i];
+}
+printf(" \n la suma producto punto es: %f", suma);
+
+
+}
+
+float escalar (int myVector[3], int myVector2[3],int size)
+{
+float suma=0.0;
+for(int i = 0; i<=size; i++)
+{
+suma += myVector[i]*myVector[i] +myVector2[i]*myVector2[i];
+}
+printf(" \n la raíz de %f",suma);
+return sqrt(suma);
+}
+
+void dos(int vector1[3],int *ptr, double *ptr2)
+{
+float suma=0.0;
+for(int i = 0; i<3; i++){
+suma += vector1[i]*vector1[i];
+}
+float r = sqrt (suma);
+printf(" El vector unitario es: %f \n a la menos uno 1/%f = %f \n",r,r,1/r);
+for(int i = 0; i<3; i++)
+{
+*(ptr2+1) = *(ptr+i)*1/r;
+printf(" el vector unitario: %d * 1/%f ",vector1[i],1/r);
+printf (" = %f \n",*(ptr2+1) );
+}
+printf("\n");
+}
